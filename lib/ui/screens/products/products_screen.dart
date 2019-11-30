@@ -16,6 +16,7 @@ class ProductsScreen extends StatelessWidget {
     return StreamBuilder(
       stream: Provider.of<CartBloc>(context).productCount,
       builder: (context, AsyncSnapshot<int> snapshot) => Scaffold(
+        drawer: AppDrawer(),
         appBar: AppBar(
           title: Text('Выбираем нямки'),
           actions: <Widget>[
@@ -44,7 +45,6 @@ class ProductsScreen extends StatelessWidget {
               )
           ],
         ),
-        drawer: AppDrawer(),
         body: Consumer<DBService>(
           builder: (context, dbService, child) => StreamBuilder(
             stream: dbService.read<Product>(),
@@ -70,13 +70,18 @@ class ProductsScreen extends StatelessWidget {
   }
 
   Widget _buildProduct(BuildContext context, Product product) {
+    var borderRadius = BorderRadius.circular(15);
     return Container(
+      key: Key(product.id),
       margin: EdgeInsets.all(5),
       child: Stack(children: <Widget>[
         Positioned.fill(
           bottom: 0.0,
           child: Material(
             elevation: 3,
+            shape: RoundedRectangleBorder(
+              borderRadius: borderRadius,
+            ),
             child: GridTile(
               key: Key(product.id),
               header: GridTileBar(
@@ -87,26 +92,27 @@ class ProductsScreen extends StatelessWidget {
               ),
               footer: GridTileBar(
                 title: Text(
-                  product.price != null
-                      ? '${product.price}₽'
-                      : 'Цена не указана',
+                  '${product.price}₽',
                   style: TextStyle(color: Colors.grey[850]),
                 ),
               ),
               child: Container(
-                child: ProductImage(product),
-              ),
+                  padding: EdgeInsets.symmetric(vertical: 30),
+                  child: ProductImage(product)),
             ),
           ),
         ),
         Positioned.fill(
-            child: new Material(
-                color: Colors.transparent,
-                child: new InkWell(
-                  onTap: () => showDialog(
-                      context: context,
-                      builder: (context) => ProductDialog(product)),
-                ))),
+          child: Material(
+            color: Colors.transparent,
+            child: InkWell(
+              borderRadius: borderRadius,
+              onTap: () => showDialog(
+                  context: context,
+                  builder: (context) => ProductDialog(product)),
+            ),
+          ),
+        ),
       ]),
     );
   }

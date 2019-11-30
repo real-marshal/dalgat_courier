@@ -2,25 +2,52 @@ import 'package:flutter/material.dart';
 
 class AppButton extends StatelessWidget {
   final String text;
+  final ButtonType buttonType;
+  final ShapeBorder shape;
   final Function onPressed;
 
-  AppButton(this.text, {this.onPressed});
+  AppButton(
+      {@required this.text,
+      this.buttonType = ButtonType.raised,
+      shape,
+      this.onPressed})
+      : shape = shape ??
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(25.0),
+            );
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 50,
-      child: FlatButton(
-        padding: EdgeInsets.symmetric(horizontal: 20),
-        color: Colors.teal,
-        shape: new RoundedRectangleBorder(
-            borderRadius: new BorderRadius.circular(25.0)),
-        child: Text(
-          text,
-          style: TextStyle(color: Theme.of(context).accentColor),
-        ),
-        onPressed: onPressed,
-      ),
+    return ButtonTheme(
+      minWidth: 10,
+      height: 40,
+      child: buttonType == ButtonType.raised
+          ? FlatButton(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              color: Theme.of(context).primaryColor,
+              shape: shape,
+              child: Text(
+                text,
+                style: TextStyle(
+                  color: Theme.of(context).accentColor,
+                ),
+              ),
+              onPressed: onPressed,
+            )
+          : OutlineButton(
+              borderSide: BorderSide(color: Theme.of(context).primaryColor),
+              shape: shape,
+              child: Text(
+                text,
+                style: TextStyle(color: Theme.of(context).primaryColor),
+              ),
+              onPressed: onPressed,
+            ),
     );
   }
+}
+
+enum ButtonType {
+  raised,
+  secondary,
 }

@@ -13,7 +13,7 @@ class ProductImage extends StatelessWidget {
       child: product.image != null
           ? Image.network(
               product.image,
-              fit: BoxFit.fill,
+              fit: BoxFit.contain,
               loadingBuilder: (context, child, loadingProgress) =>
                   loadingProgress == null
                       ? child

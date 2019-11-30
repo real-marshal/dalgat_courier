@@ -1,4 +1,5 @@
 import 'package:dalgat_courier/models/cart.dart';
+import 'package:dalgat_courier/models/cart_product.dart';
 import 'package:dalgat_courier/models/product.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -20,7 +21,7 @@ class CartBloc {
     _cartBS.add(_cart);
   }
 
-  void removeProduct(Product product) {
+  void removeProduct(CartProduct product) {
     _cart.removeProduct(product);
     _cartBS.add(_cart);
   }

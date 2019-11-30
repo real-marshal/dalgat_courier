@@ -16,7 +16,7 @@ class Product implements DBModel {
         id: map['id'],
         title: map['title'],
         image: map['image'],
-        price: map['price']);
+        price: map['price'] ?? 0);
   }
 
   @override

@@ -6,6 +6,7 @@ class Cart {
 
   List<CartProduct> get products => _products;
   int get numberOfProducts => _products.length;
+  int get price => _products.fold(0, (sum, product) => sum + product.price);
 
   void addProduct(Product product, int number) {
     final cartProduct = _products.firstWhere(
@@ -17,7 +18,7 @@ class Cart {
     cartProduct.add(number);
   }
 
-  void removeProduct(Product product) {
+  void removeProduct(CartProduct product) {
     _products.remove(product);
   }
 }

@@ -30,7 +30,7 @@ class AuthScreenState extends State<AuthScreen> {
           : await userBloc.signIn(email, password);
 
       Navigator.pop(context);
-    } catch (err) {
+    } on AuthException catch (err) {
       setState(() {
         error =
             'Ошибка ${isRegister ? 'регистрации' : 'входа'}: ${err.message}';
@@ -68,6 +68,7 @@ class AuthScreenState extends State<AuthScreen> {
                     ),
                     AppTextField(
                       hintText: 'Пароль',
+                      obscureText: true,
                       onChanged: (value) => setState(() => password = value),
                     ),
                     Padding(
@@ -75,9 +76,11 @@ class AuthScreenState extends State<AuthScreen> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
-                          AppButton('Войти в аккаунт',
+                          AppButton(
+                              text: 'Войти в аккаунт',
                               onPressed: () => _signIn(userBloc)),
-                          AppButton('Создать',
+                          AppButton(
+                              text: 'Создать',
                               onPressed: () => _register(userBloc)),
                         ],
                       ),

@@ -24,10 +24,7 @@ class UserBloc {
     }
 
     var user = await _dbService.create<User>(
-      User(
-          id: authResult.user.uid,
-          email: authResult.user.email,
-          role: Role.buyer),
+      User(email: authResult.user.email, role: Role.buyer),
     );
 
     _userBS.add(user);

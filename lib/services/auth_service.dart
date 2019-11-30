@@ -5,9 +5,8 @@ class AuthService {
 
   Future<AuthResult> register(String email, String password) async {
     try {
-      var authResult = await _auth.createUserWithEmailAndPassword(
+      return await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
-      return authResult;
     } catch (err) {
       throw new AuthException(
           registerErrorsMap[err.code] ?? 'неизвестная ошибка');
@@ -16,9 +15,8 @@ class AuthService {
 
   Future<AuthResult> signIn(String email, String password) async {
     try {
-      var authResult = await _auth.signInWithEmailAndPassword(
+      return await _auth.signInWithEmailAndPassword(
           email: email, password: password);
-      return authResult;
     } catch (err) {
       throw new AuthException(
           signInErrorsMap[err.code] ?? 'неизвестная ошибка');

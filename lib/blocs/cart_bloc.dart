@@ -18,7 +18,6 @@ class CartBloc {
   void addProduct(Product product, int number) {
     _cart.addProduct(product, number);
     _cartBS.add(_cart);
-    print(_cart.numberOfProducts);
   }
 
   void removeProduct(Product product) {

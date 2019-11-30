@@ -1,7 +1,7 @@
 import 'package:dalgat_courier/services/db_service.dart';
 import 'package:enum_to_string/enum_to_string.dart';
 
-class User extends DBModel {
+class User implements DBModel {
   String get collectionName => 'users';
 
   final String id;
@@ -13,9 +13,10 @@ class User extends DBModel {
   @override
   User fromMap(Map<String, dynamic> map) {
     return User(
-        id: map[id],
-        email: map['email'],
-        role: EnumToString.fromString(Role.values, map['role']));
+      id: map[id],
+      email: map['email'],
+      role: EnumToString.fromString(Role.values, map['role']),
+    );
   }
 
   @override

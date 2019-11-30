@@ -3,15 +3,15 @@ import 'package:dalgat_courier/models/product.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class ProductAdd extends StatefulWidget {
+class ProductAddControls extends StatefulWidget {
   final Product product;
-  ProductAdd(this.product);
+  ProductAddControls(this.product);
 
   @override
-  State<StatefulWidget> createState() => ProductAddState();
+  State<StatefulWidget> createState() => ProductAddControlsState();
 }
 
-class ProductAddState extends State<ProductAdd> {
+class ProductAddControlsState extends State<ProductAddControls> {
   int number = 1;
 
   @override

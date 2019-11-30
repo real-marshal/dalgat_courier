@@ -1,5 +1,6 @@
 import 'package:dalgat_courier/models/product.dart';
-import 'package:dalgat_courier/ui/screens/products/product_add.dart';
+import 'package:dalgat_courier/ui/screens/products/product_add_controls.dart';
+import 'package:dalgat_courier/ui/screens/products/product_image.dart';
 import 'package:flutter/material.dart';
 
 class ProductDialog extends StatelessWidget {
@@ -24,19 +25,9 @@ class ProductDialog extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: Image.network(
-                product.image,
-                fit: BoxFit.cover,
-                loadingBuilder: (context, child, loadingProgress) =>
-                    loadingProgress == null
-                        ? child
-                        : SizedBox(
-                            height: 10,
-                            width: 10,
-                            child: CircularProgressIndicator()),
-              ),
+              child: ProductImage(product),
             ),
-            ProductAdd(product),
+            ProductAddControls(product),
           ],
         ),
       ),

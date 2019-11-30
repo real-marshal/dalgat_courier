@@ -13,7 +13,7 @@ class User implements DBModel {
   @override
   User fromMap(Map<String, dynamic> map) {
     return User(
-      id: map[id],
+      id: map['id'],
       email: map['email'],
       role: EnumToString.fromString(Role.values, map['role']),
     );
